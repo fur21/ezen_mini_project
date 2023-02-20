@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ezen.springboard.service.board.BoardService;
 import com.ezen.springboard.service.mypage.MypageService;
 import com.ezen.springboard.vo.BoardVO;
 import com.ezen.springboard.vo.CommentVO;
@@ -28,9 +27,8 @@ import com.ezen.springboard.vo.UserVO;
 public class MypageController {
 	@Autowired
 	private MypageService mypageService;
-	private BoardService boardService;
 	
-	// ÀÚ½ÅÀÇ È¸¿øÁ¤º¸ È®ÀÎÇÏ´Â ±âº»ÆäÀÌÁö
+	// ï¿½Ú½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/getMypage.do")
 	public String getMypage(Model model, @RequestParam("userId") String userId, HttpSession session) {
 		Map<String, String> getMypage = mypageService.getMypage(userId);		
@@ -45,7 +43,7 @@ public class MypageController {
 		return "mypage/mypageBasic";
 	}
 	
-	// È¸¿øÁ¤º¸ ¼öÁ¤ÆäÀÌÁöÀ¸·Î ÀÌµ¿ ¹× ÇöÀç È¸¿øÁ¤º¸ Ãâ·Â 
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 	@RequestMapping("/updateMypage.do")
 	public String updateMypage(@RequestParam("userId") String userId, Model model, HttpSession session) {
 		UserVO getUser = mypageService.getUser(userId);
@@ -57,7 +55,7 @@ public class MypageController {
 		return "mypage/mypageModify";
 	}
 	
-	// È¸¿øÁ¤º¸ ¼öÁ¤ ¹× ±âº»ÆäÀÌÁö·Î ÀÌµ¿
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@PostMapping(value="/updateUser.do", produces="application/text; charset=UTF8")
 	public String updateUser(Model model, HttpSession session, UserVO userVO) {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
@@ -68,7 +66,7 @@ public class MypageController {
 		return "redirect:/mypage/getMypage.do?userId=" + loginUser.getUserId();
 	}
 
-	// È¸¿øÅ»Åð ÆäÀÌÁö·Î ÀÌµ¿
+	// È¸ï¿½ï¿½Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping("/deleteMypage.do")
 	public String deleteMypage(@RequestParam("userId") String userId, HttpSession session) {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
@@ -77,7 +75,7 @@ public class MypageController {
 		return "mypage/mypageWithdrawal";
 	}
 	
-	// È¸¿øÅ»Åð ÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â Àü ºñ¹Ð¹øÈ£ ÀÎÁõ
+	// È¸ï¿½ï¿½Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å»ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
 	@PostMapping("/pwdCheck.do")
 	@ResponseBody
 	public String pwdCheck(@RequestParam("userId") String userId, UserVO userVO)  {	
@@ -94,7 +92,7 @@ public class MypageController {
 		return returnStr;
 	}
 	
-	// È¸¿øÅ»Åð ¹× ¸ÞÀÎÆäÀÌÁö·Î ÀÌµ¿
+	// È¸ï¿½ï¿½Å»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping("/deleteUser")
 	public String deleteUser(@RequestParam("userId") String userId, HttpSession session) {
 		
@@ -104,7 +102,7 @@ public class MypageController {
 		return "redirect:/index.jsp";
 	}
 	
-	// ÀÚ½ÅÀÌ ÀÛ¼ºÇÑ °Ô½ÃÆÇ ¸ñ·Ï ÆäÀÌÁö
+	// ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/postMypage.do")
 	public String myBoardList(@RequestParam Map<String, String> paramMap, 
 			Criteria cri, HttpSession session, Model model) {
@@ -134,7 +132,7 @@ public class MypageController {
 		return "mypage/mypagePost";
 	}
 	
-	// ÀÚ½ÅÀÌ ÀÛ¼ºÇÑ ´ñ±Û ¸ñ·Ï ÆäÀÌÁö
+	// ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/commentMypage.do")
 	public String getCommentList(@RequestParam Map<String, String> paramMap, 
 			Criteria cri, HttpSession session, Model model) {

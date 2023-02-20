@@ -8,13 +8,59 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style>
+	img {
+		position:relative;
+		left: 100px;
+	}
+	ul, li {
+		list-style: none;
+	}
+	
+	a {
+		 text-decoration: none;
+		 color: black;
+		 font-weight: 500;
+		 font-size: 1.5rem;
+	}
+	
+	a:hover {
+		text-decoration: underline;
+	}
+	
+	nav ul li{
+		display: inline-block;
+	}
+	nav * {
+	  vertical-align: middle;
+	}
+	
+	.main-div li a {
+		font-size: 1.125rem;
+	}
+	
+	.user-nav {
+		display: flex;
+		align-items: center;
+		margin-right: 100px;
+	}
+	
+	.user-nav li {
+		margin-left: 10px;
+	}
+	
+	.user-nav li a {
+		font-size: 0.9rem;
+	}
+
+
+
     #main_content {display: inline-block; width: 100%;}  
        #main_content {display: inline-block; width: 100%;}
       
       #d_list { float: left; width: 20%; text-align: center;}
     #list_menu { margin-top: 50px;}
     #list_menu li {margin: 10px;  height:50px; list-style: none;}
-    #list_menu a { text-decoration: none;}
+    .side_link { font-weight:bold; }
     
     
     #main_div { float:right; text-align: center; width: 50%; margin-right:300px;}
@@ -42,19 +88,52 @@
 </head>
 <body>
 	<div>
-    <header>
-      <br><br><br>
-    </header>
+    <header style="display: flex; align-items: center; justify-content: space-between">
+		<h1>
+		<!-- /를 붙이면 무조건 루트주소 뒤에 붙는다. -->
+		<!-- localhost:8090/user/login.do -->
+		<!-- localhost:8090/hello.do -->
+			<a href="/index.jsp"><img src="/images/(small)ReviewUs.png" width="200px"></a>
+		</h1>
+		<nav id="main">
+			<ul class="main-nav">
+				<li>
+					<a href="/board/getBoardList.do">&ensp;BARS ＆ PUBS&emsp;</a>
+				</li>			
+				<li>
+					<a href="/board/getBoardList.do">&ensp;DESSERT PLACES&emsp;</a>
+				</li>			
+				<li>
+					<a href="/board/getBoardList.do">&ensp;RESTAURANTS&emsp;</a>
+				</li>			
+				<li>
+					<a href="/board/getBoardList.do">&ensp;HOTEL</a>
+				</li>			
+			</ul>
+		</nav>
+		<nav id="user">
+			<ul class="user-nav">
+
+						<li>
+							<a href="/mypage/getMypage.do?userId=${loginUser.userId }"><b>${loginUser.userId } 님</b></a>
+						</li>
+						<li>
+							<a href="/user/logout.do">로그아웃</a>
+						</li>
+
+			</ul>	
+		</nav>
+	</header>
   </div>
   <hr>
   <main id="main_content">
     <div id="d_list">
       <ui id="list_menu">
-        <li><a href="/mypage/getMypage.do?userId=${loginUser.userId}">기본페이지</a></li>
-        <li><a href="/mypage/updateMypage.do?userId=${loginUser.userId}">회원정보 수정</a></li>
-        <li><a href="/mypage/deleteMypage.do?userId=${loginUser.userId}">회원탈퇴</a></li>
-        <li><a href="/mypage/postMypage.do?userId=${loginUser.userId}">내가 쓴 게시글</a></li>
-        <li><a href="/mypage/commentMypage.do?userId=${loginUser.userId}">내가 쓴 댓글</a></li>
+        <li><a class="side_link" href="/mypage/getMypage.do?userId=${loginUser.userId}">기본페이지</a></li>
+        <li><a class="side_link" href="/mypage/updateMypage.do?userId=${loginUser.userId}">회원정보 수정</a></li>
+        <li><a class="side_link" href="/mypage/deleteMypage.do?userId=${loginUser.userId}">회원탈퇴</a></li>
+        <li><a class="side_link" href="/mypage/postMypage.do?userId=${loginUser.userId}">내가 쓴 게시글</a></li>
+        <li><a class="side_link" href="/mypage/commentMypage.do?userId=${loginUser.userId}">내가 쓴 댓글</a></li>
       </ui>
     </div>
     <div id="main_div">
